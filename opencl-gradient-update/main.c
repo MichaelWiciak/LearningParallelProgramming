@@ -3,7 +3,7 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
-#include "helper_cwk.h"			// Note this is not the same as the 'helper.h' used for examples.
+#include "opencl_helpers.h"			// Note this is not the same as the 'helper.h' used for examples.
 
 
 //
@@ -15,18 +15,18 @@ int main( int argc, char **argv )
 	// Initialisation.
 	//
 	
-	// Initialise OpenCL. This is the same as the examples in lectures.
+	// Initialise OpenCL.
 	cl_device_id device;
 	cl_context context = simpleOpenContext_GPU(&device);
 
 	cl_int status;
 	cl_command_queue queue = clCreateCommandQueue( context, device, 0, &status );
 	
-	// Get the parameters (N = no. of nodes/gradients, M = no. of inputs). getCmdLineArgs() is in helper_cwk.h.
+	// Get the parameters (N = no. of nodes/gradients, M = no. of inputs). getCmdLineArgs() is in opencl_helpers.h.
 	int N, M;
 	getCmdLineArgs( argc, argv, &N, &M );
 
-	// Initialise host arrays. initialiseArrays() is defined in helper_cwk.h. 
+	// Initialise host arrays. initialiseArrays() is defined in opencl_helpers.h. 
 	float
 		*gradients = (float*) malloc( N* sizeof(float) ),
 		*inputs    = (float*) malloc(   M* sizeof(float) ),
@@ -51,7 +51,7 @@ int main( int argc, char **argv )
     }
 
 
-	cl_kernel kernel = compileKernelFromFile("cwk3.cl", "cwk3", context, device);
+	cl_kernel kernel = compileKernelFromFile("gradient_update.cl", "gradient_update", context, device);
 
 
 	// set the kernel arguments
@@ -101,8 +101,7 @@ int main( int argc, char **argv )
 	// displayWeights(weights_test, N, M);
 
 
-	// Output result to screen. DO NOT REMOVE THIS LINE (or alter displayWeights() in helper_cwk.h); this will be replaced
-	// with a different displayWeights() for the the assessment, so any changes you might make will be lost.
+	// Output result to screen.
 	displayWeights( weights, N, M) ;
 									// DO NOT REMOVE.
 	

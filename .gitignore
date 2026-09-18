@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# Compiled binaries / build output
+*.o
+*.out
+openmp-set-sort/set_sort
+mpi-letter-histogram/letter_hist
+opencl-gradient-update/gradient_update

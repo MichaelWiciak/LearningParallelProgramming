@@ -1,7 +1,11 @@
 //
-// Starting code for coursework 1. Requires "cwk1_extra.h", which should be placed in the same directory.
+// OpenMP example: parallel operations on a set of integers.
 //
-// Compile as per the instructions in Lecture 2, or use the provided makefile.
+// Compile with:
+//
+//   gcc -fopenmp -o set_sort main.c
+//
+// Requires set_ops.h in the same directory.
 //
 
 
@@ -16,11 +20,9 @@
 
 //
 // The set itself and the routines to initialise, destroy and print it are defined
-// in the file cwk1_extra.h that you should also have downloaded. Although you are
-// free to inspect this file, do not alter the routines it contains (or replace them
-// with your own versions), as they will be replaced as part of the assessment.
+// in set_ops.h.
 //
-// For your information, cwk1_extra.h includes the following global variables:
+// set_ops.h provides the following global variables:
 //
 // int setSize;                 // The current size of the set = number of items it contains.
 // int maxSetSize;              // The maximum size for the set (which should not be altered).
@@ -35,7 +37,7 @@
 //
 // void printSet();             // Prints the set.
 //
-#include "cwk1_extra.h"
+#include "set_ops.h"
 
 
 
@@ -236,8 +238,7 @@ int main( int argc, char **argv )
         printSet();
     }
 
-    // You MUST call this function just before finishing - do NOT remove, or change the definition of destroySet(),
-    // as it will be changed with a different version for assessment.
+    // Free associated resources before exiting.
     destroySet();
 
     return EXIT_SUCCESS;

@@ -1,11 +1,9 @@
 //
-// Starting code for the MPI coursework.
+// MPI example: parallel letter-frequency histogram.
 //
 // Compile with:
 //
-// mpicc -Wall -o cwk2 cwk2.c
-//
-// or use the provided makefile.
+// mpicc -Wall -o letter_hist main.c
 //
 
 
@@ -17,9 +15,8 @@
 #include <mpi.h>
 
 
-// Some extra routines for this coursework. DO NOT MODIFY OR REPLACE THESE ROUTINES,
-// as this file will be replaced with a different version for assessment.
-#include "cwk2_extra.h"
+// Helper routines for reading text and building histograms.
+#include "histogram_io.h"
 
 
 //
@@ -235,7 +232,7 @@ int main( int argc, char **argv )
 	//
 	if( rank==0 )
 	{
-		saveHist( globalHist, MAX_LETTERS );			// Defined in cwk2_extras.h; do not change or replace the call.
+		saveHist( globalHist, MAX_LETTERS );			// Defined in histogram_io.h; do not change or replace the call.
 		free( fullText );
 		free( localText );
 	}
